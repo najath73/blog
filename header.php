@@ -20,12 +20,18 @@
                 <li class="nav-item active">
                     <a class="nav-link" href="index.php">Accueil <span class="sr-only">(current)</span></a>
                 </li>
+                <?php if(isset($_SESSION['user_id']) and !empty($_SESSION['user_id']) ): ?>
+                    <li class="nav-item">
+                    <a class="nav-link" href="signup.php">Ajouter un post</a>
+                </li>
+                <?php else: ?>
                 <li class="nav-item">
                     <a class="nav-link" href="signup.php">Inscription</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="signin.php">Se connecter</a>
                 </li>
+                <?php endif; ?>
             </ul>
             <form class="form-inline my-2 my-lg-0">
                 <input class="form-control mr-sm-2" type="text" placeholder="Search">
