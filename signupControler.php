@@ -16,7 +16,7 @@ if(isset($_POST['submit'])){
         $emailError = filter_var($email, FILTER_VALIDATE_EMAIL) ? "" : "L'adresse e-mail n'est pas valide";
         if(empty($nomError) and empty($prenomError) and empty($mdpError) and empty($mdpError2) and empty($emailError)){
             $insert_user = $db->prepare("INSERT INTO users(first_name, last_name, email, password, creation_date) values(:first_name, :last_name, :email, :password, :creation_date) ");
-            $insert_user->execute([
+            $resultat = $insert_user->execute([
                 "first_name" => $prenom,
                 "last_name" => $nom,
                 "email" => $email,
@@ -24,8 +24,10 @@ if(isset($_POST['submit'])){
                 "creation_date" => date("Y-m-d H:i:s")
             ]);
 
+            if ($resultat ==1)
+                header('location: signin.php');
 
-            header('location: signin.php');
+            $error_signup = "Email existe déja";
         }
     }else{
         $fieldError =  "Tous les champs sont requis";

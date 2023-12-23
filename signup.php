@@ -1,4 +1,5 @@
 <?php
+session_start();
 require_once("./db.php");
 require_once("./signupControler.php");
 require_once("./header.php");
@@ -6,6 +7,20 @@ require_once("./header.php");
 
 <div class="container">
 
+
+    <?php if(!empty($error_signup)):?> 
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+          <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+          <small> <?= $error_signup ?></small> 
+        </div>
+        
+        <script>
+          $(".alert").alert();
+        </script>
+    <?php endif;?>
+    
     <h1 class="display-4">Inscription</h1>
     <?php if(!empty($fieldError)):?> 
         <small id="emailHelp" class="form-text text-danger"><?= "* " . $fieldError ?> </small>
